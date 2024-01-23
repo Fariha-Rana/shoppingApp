@@ -18,10 +18,10 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <nav className="bg-gray-700">
-        <ul className="flex justify-between items-center px-8">
-          <div className="flex items-center gap-12">
+    <nav className="bg-gray-600 font-bold w-full">
+      <ul className=" flex justify-between items-center px-8 py-2">
+        <div className="hidden min-[1024px]:flex items-center min-[1024px]:gap-12">
+          <li>
             <Link href="/" className="">
               <Image
                 width={16}
@@ -31,61 +31,68 @@ const Navbar = () => {
                 className="w-20 h-auto"
               />
             </Link>
+          </li>
+          <li>
             <Location />
-          </div>
-          <Search />
-          <div className="flex items-center justify-center gap-12">
-            <Cart />
-            <Auth />
-          </div>
-        </ul>
-
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="block lg:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="text-white focus:outline-none"
-            >
-              {isMobileMenuOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
-
-          <Desktop />
+          </li>
         </div>
+        <li>
+          <Search />
+        </li>
+        <div className="hidden min-[1024px]:flex items-center justify-center min-[1024px]:gap-12">
+          <li>
+            <Auth />
+          </li>
+          <li>
+            <Cart />
+          </li>
+        </div>
+      </ul>
 
-        <Mobile isMobileMenuOpen={isMobileMenuOpen} />
-      </nav>
-    </>
+      <section className="container mx-auto flex items-center justify-between">
+        <div className="block lg:hidden">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-white focus:outline-none"
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+      </section>
+
+      <Desktop />
+      <Mobile isMobileMenuOpen={isMobileMenuOpen} />
+    </nav>
   );
 };
 

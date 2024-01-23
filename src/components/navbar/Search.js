@@ -1,12 +1,10 @@
 function Search() {
   return (
     <div className='flex items-center justify-center'>
-    <div className="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
-        <div className="w-full">
-            <input type="search" className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+    <div className="flex items-center bg-white rounded-lg w-full " x-data="{ search: '' }">
+            <input type="search" className="min-[1024px]:w-[50rem] px-4 text-gray-800 rounded-full focus:outline-none"
                 placeholder="search" x-model="search" />
-        </div>
-            <button type="submit" className={`flex items-center bg-blue-500 justify-center w-12 h-12 text-white rounded-r-lg cursor-pointer`}
+            <button type="submit" className={`flex items-center bg-blue-500 justify-center w-10 h-10 text-white rounded-r-lg cursor-pointer`}
                 disabled="search.length == 0">
                 <svg className="w-5 h-5 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">

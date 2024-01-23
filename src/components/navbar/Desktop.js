@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function Desktop() {
   return (
-    <div className="hidden lg:flex space-x-4">
+    <div className="bg-gray-900 hidden lg:w-full lg:flex lg:justify-center lg:items-center lg:gap-8 py-4">
       <Link href="#" className="text-white">
         Women
       </Link>{" "}
