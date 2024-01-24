@@ -1,8 +1,9 @@
 import Link from "next/link";
 
-function Desktop() {
+function Items() {
   return (
-    <div className="bg-gray-900 hidden lg:w-full lg:flex lg:justify-center lg:items-center lg:gap-8 py-4">
+    <>
+      {" "}
       <Link href="#" className="text-white">
         Women
       </Link>{" "}
@@ -33,8 +34,8 @@ function Desktop() {
       <Link href="#" className="text-white">
         Skin Care
       </Link>
-    </div>
+    </>
   );
 }
 
-export default Desktop;
+export default Items;

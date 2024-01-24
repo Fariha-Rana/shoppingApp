@@ -1,9 +1,15 @@
-import React from 'react'
-import Navbar from '@/components/navbar/Navbar'
+import React from "react";
+import Navbar from "@/components/navbar/Navbar";
+import Highlight from "@/components/Highlight";
+import Recommendation from "@/components/Recommendation";
 function Home() {
   return (
-    <div><Navbar/></div>
-  )
+    <>
+      <Navbar />
+      <Highlight/>
+      <Recommendation/>
+    </>
+  );
 }
 
-export default Home
+export default Home;

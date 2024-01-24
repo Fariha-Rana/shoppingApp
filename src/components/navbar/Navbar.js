@@ -1,14 +1,16 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import Desktop from "./Desktop";
-import Mobile from "./Mobile";
-import Search from "@/components/navbar/Search";
-import Location from "./Location";
-import Cart from "./Cart";
-import Auth from "./Auth";
-import { useState } from "react";
+import {useState} from "react";
+
+// custom components
+import ModalIcon from "./ModalIcon";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
+import Search from "./NavItems/Search";
+import Location from "./NavItems/Location";
+import Cart from "./NavItems/Cart";
+import Auth from "./NavItems/Auth";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,82 +18,58 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
-
   return (
-    <nav className="bg-gray-600 font-bold w-full">
-      <ul className=" flex justify-between items-center px-8 py-2">
-        <div className="hidden min-[1024px]:flex items-center min-[1024px]:gap-12">
-          <li>
-            <Link href="/" className="">
-              <Image
-                width={16}
-                height={16}
-                alt="logo"
-                src="/next.svg"
-                className="w-20 h-auto"
-              />
-            </Link>
-          </li>
-          <li>
-            <Location />
-          </li>
+    <nav className="font-bold m-0 p-0 w-full">
+      {/* for larger screen size */}
+      <ul className="hidden min-[800px]:flex justify-between items-center px-8 py-2 bg-gray-600 ">
+        <div className="flex items-center min-[800px]:gap-12">
+          <Link href="/" className="">
+            <Image
+              width={16}
+              height={16}
+              alt="logo"
+              src="/next.svg"
+              className="w-20 h-auto"
+            />
+          </Link>
+          <Location />
         </div>
-        <li>
-          <Search />
-        </li>
-        <div className="hidden min-[1024px]:flex items-center justify-center min-[1024px]:gap-12">
-          <li>
-            <Auth />
-          </li>
-          <li>
-            <Cart />
-          </li>
+        <Search />
+        <div className="flex items-center gap-12">
+          <Auth />
+          <Cart />
         </div>
       </ul>
 
-      <section className="container mx-auto flex items-center justify-between">
-        <div className="block lg:hidden">
-          <button
-            onClick={toggleMobileMenu}
-            className="text-white focus:outline-none"
-          >
-            {isMobileMenuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
+      {/* for smaller screen size */}
+      <section className="">
+        <aside className="min-[800px]:hidden flex flex-grow w-full bg-gray-800 py-2  pr-4 h-14">
+          <Search />
+          <Cart />
+        </aside>
+
+        <aside className="min-[800px]:hidden flex items-center justify-between bg-gray-600 px-2 py-2">
+          <Link href="/" className="max-[560px]:w-10">
+            <Image
+              width={16}
+              height={16}
+              alt="logo"
+              src="/next.svg"
+              className="w-16 h-auto"
+            />
+          </Link>
+          <Location />
+          <Auth />
+          <ModalIcon
+            toggleMobileMenu={toggleMobileMenu}
+            isMobileMenuOpen={isMobileMenuOpen}
+          />
+        </aside>
       </section>
 
-      <Desktop />
-      <Mobile isMobileMenuOpen={isMobileMenuOpen} />
+      {/* categories for shopping */}
+      <DesktopMenu />
+      <MobileMenu isMobileMenuOpen={isMobileMenuOpen} />
     </nav>
   );
 };
