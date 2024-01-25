@@ -19,9 +19,9 @@ const Navbar = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
   return (
-    <nav className="font-bold m-0 p-0 w-full">
+    <nav className="fixed top-0 font-bold m-0 p-0 w-full z-50">
       {/* for larger screen size */}
-      <ul className="hidden min-[800px]:flex justify-between items-center px-8 py-2 bg-gray-600 ">
+      <ul className="hidden min-[900px]:flex justify-between items-center px-8 py-2 bg-gray-600 ">
         <div className="flex items-center min-[800px]:gap-12">
           <Link href="/" className="">
             <Image
@@ -43,12 +43,12 @@ const Navbar = () => {
 
       {/* for smaller screen size */}
       <section className="">
-        <aside className="min-[800px]:hidden flex flex-grow w-full bg-gray-800 py-2  pr-4 h-14">
+        <aside className="min-[899px]:hidden flex flex-grow w-full bg-gray-800 py-2  pr-4 h-14">
           <Search />
           <Cart />
         </aside>
 
-        <aside className="min-[800px]:hidden flex items-center justify-between bg-gray-600 px-2 py-2">
+        <aside className="min-[899px]:hidden flex items-center justify-between bg-gray-600 px-2 py-2">
           <Link href="/" className="max-[560px]:w-10">
             <Image
               width={16}

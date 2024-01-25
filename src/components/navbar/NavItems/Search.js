@@ -12,7 +12,7 @@ function Search() {
       />
       <button
         type="submit"
-        className={`flex items-center bg-yellow-500  justify-center w-16 min-[800px]:h-11 h-auto text-white rounded-r-lg cursor-pointer`}
+        className={`flex items-center bg-yellow-500  justify-center w-16 min-[900px]:h-11 h-auto text-white rounded-r-lg cursor-pointer`}
         disabled="search.length == 0"
       >
         <svg

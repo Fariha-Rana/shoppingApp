@@ -1,13 +1,55 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import userSavedData from "@/utils/UserSavedData";
+import useAuthentication from "@/context/useAuthentication";
+import { useEffect, useState } from "react";
 function Cart() {
+  const [cartCount, setCartCount] = useState(null);
+  const { userData } = useAuthentication();
+
+  useEffect(() => {
+    async function getData() {
+      const cartItemCount = await userSavedData.loadData(userData?.$id);
+      setCartCount(cartItemCount);
+    }
+    getData();
+  }, [userData]);
+
+  console.log(cartCount);
+
   return (
     <div className="flex justify-center items-center">
-      <div className="relative py-2">
+      <div className="relative py-2 mr-12">
+        <Link href={"/cart"} className="cursor-pointer">
+          <div className="t-0 absolute left-5">
+            <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+              {cartCount?.wishlist}
+            </p>
+          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            width="28"
+            height="28"
+            className="mt-2 h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C14.09 3.81 15.76 3 17.5 3 20.58 3 23 5.42 23 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+        </Link>
+      </div>
+      <div className="relative py-2 mr-4">
         <Link href={"/cart"} className="cursor-pointer">
           <div className="t-0 absolute left-3">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-              0
+              {cartCount?.cart}
             </p>
           </div>
           <svg
@@ -16,7 +58,7 @@ function Cart() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="file: mt-4 h-6 w-6"
+            className="mt-4 h-6 w-6"
           >
             <path
               strokeLinecap="round"
