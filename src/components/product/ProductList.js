@@ -1,15 +1,16 @@
 import { getImagesForProduct } from "@/utils/fetchImages";
 import Image from "next/image";
 import CartandWishlist from "./CartandWishlist";
+
 const ProductList = async ({ query }) => {
   const images = await getImagesForProduct(query, 12);
 
   const dummyProducts = Array.from({ length: 12 }).map((_, index) => ({
     id: index + 1,
-    name: `Product ${index + 1}`,
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud`,
+    title: `Product ${index + 1}`,
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
     price: `$${(Math.random() * 50).toFixed(2)}`,
-    rating: Math.random() * 5,
+    rating: `${Math.random() * 5}`,
     image: images[index],
   }));
 
@@ -21,10 +22,10 @@ const ProductList = async ({ query }) => {
             width={500}
             height={500}
             src={product.image}
-            alt={product.name}
+            alt={product.title}
             className="w-full h-72 object-cover mb-2 rounded"
           />
-          <h2 className="text-lg font-bold mb-2">{product.name}</h2>
+          <h2 className="text-lg font-bold mb-2">{product.title}</h2>
           <p className="text-gray-600 mb-2 font-sans text-sm">
             {product.description}
           </p>
@@ -46,7 +47,7 @@ const ProductList = async ({ query }) => {
               ))}
             </div>
           </div>
-          <CartandWishlist />
+          <CartandWishlist  product={product}/>
         </div>
       ))}
     </div>

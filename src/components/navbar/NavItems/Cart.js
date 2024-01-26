@@ -4,27 +4,31 @@ import Link from "next/link";
 import userSavedData from "@/utils/UserSavedData";
 import useAuthentication from "@/context/useAuthentication";
 import { useEffect, useState } from "react";
+
+
 function Cart() {
-  const [cartCount, setCartCount] = useState(null);
+  const [itemCount, setItemCount] = useState(null);
   const { userData } = useAuthentication();
 
   useEffect(() => {
-    async function getData() {
-      const cartItemCount = await userSavedData.loadData(userData?.$id);
-      setCartCount(cartItemCount);
+    if (userData) {
+      async function getData() {
+        const _itemCount = await userSavedData.cartandWishlistCount(
+          userData?.$id
+        );
+        if (itemCount?.documents?.length != 0) setItemCount(_itemCount);
+      }
+      getData();
     }
-    getData();
   }, [userData]);
-
-  console.log(cartCount);
 
   return (
     <div className="flex justify-center items-center">
       <div className="relative py-2 mr-12">
-        <Link href={"/cart"} className="cursor-pointer">
+        <Link href={"/wishlist/wishlistitem"} className="cursor-pointer">
           <div className="t-0 absolute left-5">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-              {cartCount?.wishlist}
+              {itemCount?.wishlist || 0}
             </p>
           </div>
           <svg
@@ -46,10 +50,10 @@ function Cart() {
         </Link>
       </div>
       <div className="relative py-2 mr-4">
-        <Link href={"/cart"} className="cursor-pointer">
-          <div className="t-0 absolute left-3">
+        <Link href={"/cart/cartitems"} className="cursor-pointer">
+          <div className="top-[0.8rem] absolute left-4">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-              {cartCount?.cart}
+              {itemCount?.cart || 0}
             </p>
           </div>
           <svg

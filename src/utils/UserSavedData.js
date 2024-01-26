@@ -1,55 +1,88 @@
 import { database } from "./appwriteConfig";
-import userAuth from "./authentication";
 import { Permission, Role } from "appwrite";
+import {
+  DATABASE_ID,
+  STATUS_COLLECTION_ID,
+  CART_COLLECTION_ID,
+  WISHLIST_COLLECTION_ID,
+} from "./envVariables";
 
 class UserSavedData {
-  async loadData(doc_id) {
-    console.log(doc_id)
+  async cartandWishlistCount(doc_id) {
     try {
       let response = await database.getDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-        process.env.NEXT_PUBLIC_STATUS_COLLECTION_ID,
+        DATABASE_ID,
+        STATUS_COLLECTION_ID,
         doc_id
       );
 
       console.log(response);
-       return response;
+      return response;
     } catch (error) {
       console.error("error");
       return [];
     }
   }
 
-  async sendSavedData(data, COL_ID) {
+  async existingDoc(COL_ID, DOC_ID) {
     try {
-      let user = await userAuth.getCurrentUser();
-      let isExistingData = await database.getDocument(user?.$id);
+      let isExistingData = await database.getDocument(
+        DATABASE_ID,
+        COL_ID,
+        DOC_ID
+      );
+      console.log(isExistingData);
+      return isExistingData;
+    } catch (err) {
+      return [];
+    }
+  }
 
-      if (!isExistingData || isExistingData.length == 0) {
-        const permissions = [];
-        if (user) {
-          permissions.push(Permission.write(Role.users()));
-        }
+  async postCartorWishlistData(data, COL_ID, DOC_ID) {
+    try {
+      let isExistingData = await this.existingDoc(COL_ID, DOC_ID);
+
+      if (
+        isExistingData.length !== 0 &&
+        isExistingData.documents?.length !== 0
+      ) {
+        const promise = await database.updateDocument(
+          DATABASE_ID,
+          COL_ID,
+          DOC_ID,
+          {
+            title: [...isExistingData.title, data.title],
+            description: [...isExistingData.description, data.description],
+            rating: [...isExistingData.rating, data.rating],
+            image: [...isExistingData.image, data.image],
+            price: [...isExistingData.price, data.price],
+            inCart: [...isExistingData.inCart, data?.inCart],
+            inWishlist: [...isExistingData.inWishlist, data?.inWishlist],
+          }
+        );
+        console.log(promise);
+        return;
+      } else {
+        const permissions = [Permission.write(Role.users())];
 
         const createdDocument = await database.createDocument(
-          process.env.APPWRITE_DATABASE_ID,
+          DATABASE_ID,
           COL_ID,
-          user?.$id,
-          data,
+          DOC_ID,
+          {
+            title: [data.title],
+            description: [data.description],
+            rating: [data.rating],
+            price: [data.price],
+            image: [data.image],
+            inCart: [data?.inCart],
+            inWishlist: [data?.inWishlist],
+          },
           permissions
         );
         console.log(createdDocument);
-        return createdDocument;
+        return;
       }
-
-      let updatedData = await database.updateDocument(
-        process.env.APPWRITE_DATABASE_ID,
-        COL_ID,
-        user?.$id,
-        data
-      );
-      console.log(updatedData);
-      return updatedData;
     } catch (error) {
       console.error(error);
       return [];
