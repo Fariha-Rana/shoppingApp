@@ -36,7 +36,7 @@ function Highlight() {
       data-te-ride="carousel"
     >
 
-      <div className="relative w-full min-[800px]:h-96 overflow-hidden lg:top-32 md:top-[7.7rem] top-[6.9rem] -z-10">
+      <div className="relative w-full min-[800px]:h-96 overflow-hidden lg:top-32 md:top-[7.7rem] top-[7rem] -z-10">
         {highlightBanners.map((banner, index) => (
           <div
             key={index}
