@@ -112,7 +112,7 @@ const WishlistPage = () => {
           </div>
         )}
     
-        <div className="grid min-[1100px]:grid-cols-3 sm:grid-cols-2 gap-4 max-[370px]:m-8">
+        <div className="grid min-[1100px]:grid-cols-3 sm:grid-cols-2 gap-4 max-[570px]:m-8">
 
           {productsData &&
             productsData?.image?.map((desc, index) => (

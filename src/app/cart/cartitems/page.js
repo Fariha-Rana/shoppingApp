@@ -104,7 +104,7 @@ const CartPage = () => {
         </div>
       )}
 
-      <div className="mt-8  gap-4 max-[370px]:m-8">
+      <div className="mt-8  gap-4 max-[570px]:m-8">
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
