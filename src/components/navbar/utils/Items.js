@@ -19,7 +19,7 @@ function Items() {
   return (
     <>
       {categories.map((category, index) => (
-        <Link key={index} href={category.link} className="text-white font-sans">
+        <Link key={index} href={category.link} className="text-white font-sans active:underline">
           {category.name}
         </Link>
       ))}
