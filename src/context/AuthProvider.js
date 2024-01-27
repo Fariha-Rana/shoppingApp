@@ -1,25 +1,34 @@
-"use client"
-import { createContext, useState, useEffect} from "react";
+"use client";
+import { createContext, useState, useEffect } from "react";
 import userAuth from "@/utils/authentication";
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
-export default function AuthProvider({children}) {
-  const [userData, setUserData] = useState(false);
-   useEffect(() => {
-    async function checkLogInStatus(){
-      try{
-       const isData = await userAuth.getCurrentUser();
-       if(isData) setUserData(isData)
-      }catch(err){
-         console.log("error in provider");
+export default function AuthProvider({ children }) {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    async function checkLogInStatus() {
+      try {
+        const cachedUserData = localStorage.getItem("userData");
+
+        if (cachedUserData) {
+          setUserData(JSON.parse(cachedUserData));
+        } else {
+          const fetchedUserData = await userAuth.getCurrentUser();
+
+          if (fetchedUserData) {
+            localStorage.setItem("userData", JSON.stringify(fetchedUserData));
+            setUserData(fetchedUserData);
+          }
+        }
+      } catch (err) {
+        // console.error("Error in provider:", err);
       }
-     }
-     checkLogInStatus();
-   }, [])
-   
+    }
+    checkLogInStatus();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ userData, setUserData}}>
-    {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ userData, setUserData }}>{children}</AuthContext.Provider>
   );
 }

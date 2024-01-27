@@ -1,65 +1,93 @@
 "use client";
 import Image from "next/image";
-import userSavedData from "@/utils/UserSavedData";
+import { useState } from "react";
+
 import {
   WISHLIST_COLLECTION_ID,
   CART_COLLECTION_ID,
 } from "@/utils/envVariables";
+
+import userSavedData from "@/utils/UserSavedData";
 import useAuthentication from "@/context/useAuthentication";
-import { useState } from "react";
 import useCount from "@/context/useCount";
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function CartandWishlist({ product }) {
-  const { userData } = useAuthentication();
   const [inCart, setInCart] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
+
   const { setWishlistCount, setCartCount, wishlistCount, cartCount } =
-    useCount();
+  useCount();
+
+  const { userData } = useAuthentication();
+  const userid = userData?.$id
 
   const postCartData = async () => {
+    if (!userid) {
+      toast.error('You should log in first');
+      return;
+    }
+
     const data = {
       ...product,
       inCart: true,
+      inWishlist: false,
     };
+
     const _cartCount = cartCount + 1;
     const count = {
       cart: _cartCount,
     };
+
     setInCart(true);
     setCartCount(count.cart);
-    await userSavedData.updateCartandWishlistCount(userData?.$id, count);
+
+    await userSavedData.updateCartandWishlistCount(userid, count);
     await userSavedData.postCartorWishlistData(
       data,
       CART_COLLECTION_ID,
-      userData?.$id
+      userid
     );
   };
 
   const postWishlistData = async () => {
-    const _wishlistCount = wishlistCount + 1;
-    const count = {
-      wishlist: _wishlistCount,
-    };
-    setWishlistCount(count.wishlist);
-    setInWishlist(true);
+    if (!userid) {
+      toast.error('You should log in first');
+      return;
+    }
 
     const data = {
       ...product,
       inWishlist: true,
+      inCart: false,
     };
+
+    const _wishlistCount = wishlistCount + 1;
+    const count = {
+      wishlist: _wishlistCount,
+    };
+
+    setWishlistCount(count.wishlist);
+    setInWishlist(true);
+
     await userSavedData.updateCartandWishlistCount(
-      userData?.$id,
+     userid,
       count
     );
 
     await userSavedData.postCartorWishlistData(
       data,
       WISHLIST_COLLECTION_ID,
-      userData?.$id
+      userid
     );
   };
 
   return (
+    <>
+      <div>{ <ToastContainer/> }</div>
     <div className="flex justify-between gap-4 items-center">
       {/* Cart button */}
       <button className="flex" onClick={postCartData}>
@@ -103,6 +131,7 @@ function CartandWishlist({ product }) {
         </button>
       )}
     </div>
+     </>
   );
 }
 

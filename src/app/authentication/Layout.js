@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 function loginlayout({ children }) {
   const router = useRouter();
   const { userData } = useAuthentication();
-  if (userData){
+  const userid = userData?.id
+  if (userid){
     router.replace("/");
     return <></>;
   }

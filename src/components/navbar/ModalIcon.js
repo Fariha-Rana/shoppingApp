@@ -1,4 +1,5 @@
 function ModalIcon({ isMobileMenuOpen, toggleMobileMenu }) {
+  
   return (
     <button
       onClick={toggleMobileMenu}

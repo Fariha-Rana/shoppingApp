@@ -8,16 +8,6 @@ class UserAuth {
       const user = account.get();
       return user;
     } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async isLoggedIn() {
-    try {
-      await account.get();
-      return true;
-    } catch (e) {
-      return false;
     }
   }
 
@@ -26,17 +16,10 @@ class UserAuth {
       const currentUser = await account.get();
       return currentUser || null;
     } catch (error) {
-      console.log(error);
+      return null
     }
   }
 
-  async logOut() {
-    try {
-      await account.deleteSession("current");
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
 
 const userAuth = new UserAuth();

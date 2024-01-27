@@ -3,8 +3,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 function Search() {
-  const router = useRouter();
   const [search, setSearch] = useState("");
+
+  const router = useRouter();
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (search.length > 0) {

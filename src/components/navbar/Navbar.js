@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 
 // custom components
 import ModalIcon from "./ModalIcon";
@@ -9,7 +9,7 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import Search from "./NavItems/Search";
 import Location from "./NavItems/Location";
-import Cart from "./NavItems/CartandWishlist";
+import Cart from "./NavItems/CartandWishlistLink";
 import Auth from "./NavItems/Auth";
 
 const Navbar = () => {
@@ -18,6 +18,7 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
+
   return (
     <nav className="fixed top-0 font-bold m-0 p-0 w-full z-50">
       {/* for larger screen size */}

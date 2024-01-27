@@ -45,13 +45,13 @@ export const RecomCategories = [
     title: "Books",
     image:
       "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ym9vayUyMGNvdmVyfGVufDB8fDB8fHww",
-    url: "book-cover",
+    url: "/book-cover",
   },
   {
     title: "Jewellery",
     image:
       "https://plus.unsplash.com/premium_photo-1681276170281-cf50a487a1b7?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fGpld2Vscnl8ZW58MHx8MHx8fDA%3D",
-    url: "jewellery",
+    url: "/jewellery",
   },
   {
     title: "Skin Care",
@@ -63,12 +63,12 @@ export const RecomCategories = [
     title: "Make Up",
     image:
       "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFrZSUyMHVwfGVufDB8fDB8fHww",
-    url: "makeup-products",
+    url: "/makeup-products",
   },
   {
     title: "Toys",
     image:
       "https://images.unsplash.com/photo-1563901935883-cb61f5d49be4?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTJ8fHRveXN8ZW58MHx8MHx8fDA%3D",
-    url: "toys",
+    url: "/toys",
   },
 ];

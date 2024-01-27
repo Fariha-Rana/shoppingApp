@@ -15,11 +15,13 @@ const ProductList = async ({ query }) => {
   }));
 
   return (
-    <>
+    <section>
       {!images || images.length == 0 ? (
         <p className="text-white bg-black rounded-md text-center">no product found</p>
       ) : (
+
         <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mx-4 mb-8">
+
       {dummyProducts.map((product) => (
         <div key={product.id} className="bg-neutral-200 p-8 rounded shadow">
           <Image
@@ -29,12 +31,15 @@ const ProductList = async ({ query }) => {
             alt={product.title}
             className="w-full h-72 object-cover mb-2 rounded"
           />
+
           <h2 className="text-lg font-bold mb-2">{product.title}</h2>
           <p className="text-gray-600 mb-2 font-sans text-sm">
             {product.description}
           </p>
+
           <div className="flex items-center mb-2">
             <span className="text-green-500">{product.price}</span>
+            
             <div className="ml-2 flex">
               {Array.from({ length: 5 }).map((_, index) => (
                 <svg
@@ -56,7 +61,7 @@ const ProductList = async ({ query }) => {
       ))}
     </div>
       )}
-    </>
+    </section>
   );
 };
 

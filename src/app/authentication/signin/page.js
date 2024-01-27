@@ -1,29 +1,23 @@
 "use client";
 import userAuth from "@/utils/authentication";
 import useAuthentication from "@/context/useAuthentication";
-import { useRouter, useSearchParams } from "next/navigation";
+
+import { useRouter} from "next/navigation";
 import { useState } from "react";
 
 
 const Login = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const { setUserData } = useAuthentication();
 
+  const { setUserData } = useAuthentication();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("product");
 
   const _login = async (e) => {
     e.preventDefault();
     try {
       const session = await userAuth._createAnonymousSession(name);
       if (session) setUserData(session);
-      return
-      if (id) {
-        router.push(`/${id}`);
-        return;
-      }
       router.push(`/`);
     } catch (error) {
       setError(error.message);
@@ -32,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-screen">
-      <div className={`mx-auto w-full max-w-lg bg-gray-200/50 rounded-xl p-10`}>
+      <div className={`mx-auto w-full max-w-lg bg-gray-200/50 rounded-xl p-10 max-[550px]:m-12`}>
         <h2 className="text-center text-2xl font-bold leading-tight text-black">
           Log in as guest
         </h2>

@@ -6,6 +6,7 @@ import userSavedData from "@/utils/UserSavedData";
 export const cart_wishlist_count_Context = createContext();
 
 export default function CountProvider({ children }) {
+
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const { userData } = useAuthentication();
@@ -13,7 +14,7 @@ export default function CountProvider({ children }) {
 
   async function checkCount() {
     try {
-      const isData = await userSavedData.cartandWishlistCount(userData?.$id);
+      const isData = await userSavedData.cartandWishlistCount(userId);
       setCartCount(isData?.cart || 0);
       setWishlistCount(isData?.wishlist || 0);
     } catch (err) {
@@ -25,6 +26,7 @@ export default function CountProvider({ children }) {
       checkCount();
     }
   }, [userId]);
+  
   return (
     <cart_wishlist_count_Context.Provider
       value={{ wishlistCount, setWishlistCount, cartCount, setCartCount }}

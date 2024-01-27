@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+
 import useAuthentication from "@/context/useAuthentication";
+
 const Auth = () => {
   const { userData } = useAuthentication();
+  
   return (
     <div className="flex items-center text-center max-[560px]:text-sm text-[0.7rem]">
       {userData ? (
