@@ -90,14 +90,14 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="">
+    <div className="h-screen mt-36">
       {(productsData?.image?.length == 0 || !productsData) && (
         <div className="bg-blue-700 text-white p-4 text-center justify-center items-start">
           Nothing in cart yet
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mx-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 lg:grid-cols-4 gap-4  mx-4 mb-8">
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
