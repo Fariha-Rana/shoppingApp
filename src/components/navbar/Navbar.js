@@ -9,7 +9,7 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import Search from "./NavItems/Search";
 import Location from "./NavItems/Location";
-import Cart from "./NavItems/Cart";
+import Cart from "./NavItems/CartandWishlist";
 import Auth from "./NavItems/Auth";
 
 const Navbar = () => {

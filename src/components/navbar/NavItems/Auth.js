@@ -4,7 +4,7 @@ import useAuthentication from "@/context/useAuthentication";
 const Auth = () => {
   const { userData } = useAuthentication();
   return (
-    <div className="flex items-center text-center max-[560px]:text-[0.5rem] text-[0.7rem]">
+    <div className="flex items-center text-center max-[560px]:text-sm text-[0.7rem]">
       {userData ? (
         <p className="text-white font-mono mr-1 text-[1.2rem]"> 👋Hii,{userData?.name}</p>
       ) : (

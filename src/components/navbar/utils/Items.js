@@ -11,8 +11,8 @@ const categories = [
   { name: "Books", link: "book-cover" },
   { name: "Jewellrey", link: "jewellery" },
   { name: "Skin Care", link: "/skin-care-products" },
-  { name: "Make up", link: "makeup-products" },
-  { name: "Toys", link: "toys" },
+  { name: "Make up", link: "/makeup-products" },
+  { name: "Toys", link: "/toys" },
 ];
 
 function Items() {

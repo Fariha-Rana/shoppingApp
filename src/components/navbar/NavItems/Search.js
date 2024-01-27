@@ -1,19 +1,33 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 function Search() {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (search.length > 0) {
+      router.push(`/${search}`);
+    }
+  };
+
   return (
-    <div
-      className="flex bg-white rounded-lg flex-grow min-[800px]:mx-8 mx-2 "
-      x-data="{ search: '' }"
+    <form
+      onSubmit={handleSubmit}
+      className="flex bg-white rounded-lg flex-grow min-[800px]:mx-8 mx-2"
     >
       <input
         type="search"
         className="px-4 text-gray-800 rounded-full focus:outline-none w-full"
         placeholder="search"
-        x-model="search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <button
         type="submit"
-        className={`flex items-center bg-yellow-500  justify-center w-16 min-[900px]:h-11 h-auto text-white rounded-r-lg cursor-pointer`}
-        disabled="search.length == 0"
+        className={`flex items-center bg-yellow-500 justify-center w-16 min-[900px]:h-11 h-auto text-white rounded-r-lg cursor-pointer`}
+        disabled={search.length === 0}
       >
         <svg
           className="w-5 h-5 "
@@ -30,7 +44,7 @@ function Search() {
           ></path>
         </svg>
       </button>
-    </div>
+    </form>
   );
 }
 

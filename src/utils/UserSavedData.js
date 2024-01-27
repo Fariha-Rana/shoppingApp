@@ -8,6 +8,7 @@ import {
 } from "./envVariables";
 
 class UserSavedData {
+
   async cartandWishlistCount(doc_id) {
     try {
       let response = await database.getDocument(
@@ -15,11 +16,34 @@ class UserSavedData {
         STATUS_COLLECTION_ID,
         doc_id
       );
-
-      console.log(response);
       return response;
     } catch (error) {
-      console.error("error");
+      return false;
+    }
+  }
+
+  async updateCartandWishlistCount(doc_id, count) {
+    try {
+      const doc = await this.cartandWishlistCount(doc_id);
+      if (!doc) {
+        let response = await database.createDocument(
+          DATABASE_ID,
+          STATUS_COLLECTION_ID,
+          doc_id,
+          count
+        );
+
+        return response;
+      } else {
+        let response = await database.updateDocument(
+          DATABASE_ID,
+          STATUS_COLLECTION_ID,
+          doc_id,
+          count
+        );
+        return response;
+      }
+    } catch (error) {
       return [];
     }
   }
@@ -31,7 +55,6 @@ class UserSavedData {
         COL_ID,
         DOC_ID
       );
-      console.log(isExistingData);
       return isExistingData;
     } catch (err) {
       return [];
@@ -51,16 +74,12 @@ class UserSavedData {
           COL_ID,
           DOC_ID,
           {
-            title: [...isExistingData.title, data.title],
-            description: [...isExistingData.description, data.description],
-            rating: [...isExistingData.rating, data.rating],
             image: [...isExistingData.image, data.image],
             price: [...isExistingData.price, data.price],
             inCart: [...isExistingData.inCart, data?.inCart],
             inWishlist: [...isExistingData.inWishlist, data?.inWishlist],
           }
         );
-        console.log(promise);
         return;
       } else {
         const permissions = [Permission.write(Role.users())];
@@ -70,9 +89,6 @@ class UserSavedData {
           COL_ID,
           DOC_ID,
           {
-            title: [data.title],
-            description: [data.description],
-            rating: [data.rating],
             price: [data.price],
             image: [data.image],
             inCart: [data?.inCart],
@@ -80,11 +96,9 @@ class UserSavedData {
           },
           permissions
         );
-        console.log(createdDocument);
         return;
       }
     } catch (error) {
-      console.error(error);
       return [];
     }
   }

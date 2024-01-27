@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/context/AuthProvider";
+import CountProvider from "@/context/cart-wishCountProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,9 +17,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         {" "}
         <AuthProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <CountProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </CountProvider>
         </AuthProvider>
       </body>
     </html>

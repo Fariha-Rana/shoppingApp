@@ -1,67 +1,115 @@
 "use client";
+import React, { useState, useEffect } from "react";
+import {
+  WISHLIST_COLLECTION_ID,
+  CART_COLLECTION_ID,
+} from "@/utils/envVariables";
 import useAuthentication from "@/context/useAuthentication";
 import userSavedData from "@/utils/UserSavedData";
-import { useState, useEffect } from "react";
-import { WISHLIST_COLLECTION_ID } from "@/utils/envVariables";
-import React from "react";
-const CartPage = () => {
+import useCount from "@/context/useCount";
+
+const WishlistPage = () => {
   const [productsData, setProductsData] = useState(null);
+  const [addedStates, setAddedStates] = useState([]);
   const { userData } = useAuthentication();
+  const { cartCount, wishlistCount, setWishlistCount, setCartCount } =
+    useCount();
+
+  const addToCart = async (product, index) => {
+    const data = {
+      price: product.price[index],
+      image: product.image[index],
+      price: product.price[index],
+      inCart: true,
+    };
+
+    const updatedAddedStates = [...addedStates];
+    updatedAddedStates[index] = true;
+    setAddedStates(updatedAddedStates);
+
+    const _cartCount = cartCount + 1;
+    const count = {
+      cart: _cartCount,
+    };
+    setCartCount(count.cart);
+    await userSavedData.updateCartandWishlistCount(userData?.$id, count);
+    await userSavedData.postCartorWishlistData(
+      data,
+      CART_COLLECTION_ID,
+      userData?.$id
+    );
+  };
 
   async function getData() {
     const data = await userSavedData.existingDoc(
-        WISHLIST_COLLECTION_ID,
+      WISHLIST_COLLECTION_ID,
       userData?.$id
     );
-    if(data.length != 0 )setProductsData(data);
-    else setProductsData(null)
+    console.log;
+    console.log("data?.image?.length", data?.image?.length);
+    if (data) {
+      setProductsData(data);
+      setAddedStates(new Array(data?.image?.length).fill(false));
+    } else setProductsData(null);
   }
+
   useEffect(() => {
     getData();
   }, []);
 
   return (
-    <div className="mt-36 grid lg:grid-col-4 md:grid-col-3 sm:grid-col-2">
-      <div className="flex flex-col justify-center items-center gap-4">
-            <h1>items in your Wishlist</h1>
-        {productsData &&
-          productsData?.description?.map((desc, index) => (
-            <div className="bg-white p-4 my-4 w-max  shadow-md flex justify-center items-center" key={index}>
-              <img
-                src={productsData?.image[index]}
-                alt={desc}
-                className="w-40 h-auto object-cover mb-4"
-              />
-            <div className="flex flex-col w-80 p-4">
-            <h5 className="text-lg font-semibold mb-2">
-                {productsData?.title[index]}
-              </h5>
-              <p className="text-gray-600 mb-2">Description: {desc}</p>
-              <p className="text-gray-600 mb-2">
-                Price: {productsData?.price[index]}
-              </p>
-              <div className="flex space-x-4 items-center">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">
-                  Delete
-                </button>
-                <button
-                  className="bg-gray-500 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition duration-300"
-                  onClick={() => handleIncreaseQuantity(index)}
-                >
-                  Increase Quantity
-                </button>
-              </div>
-            </div>
-            </div>
-          ))}
-        {productsData == null && (
-          <div className="bg-blue-700 text-white p-4 col-span-2">
-            Nothing in cart yet
+    <>
+      <div className="mt-32 flex flex-col justify-center  items-center gap-4 min-h-screen">
+        {!productsData && (
+          <div className="bg-blue-700 text-white p-4 text-center">
+            Nothing in Wishlist yet
           </div>
         )}
+        <div className="mt-8 grid min-[1100px]:grid-cols-3 sm:grid-cols-2 gap-4 ">
+          {productsData &&
+            productsData?.image?.map((desc, index) => (
+              <div
+                className="bg-white p-4 my-4 w-max shadow-md flex justify-center items-center flex-col max-[370px]:ml-4"
+                key={index}
+              >
+                <Image
+                width={500}
+                height={500}
+                src={productsData?.image[index]}
+                alt="product image"
+                className="lg:w-64 md:w-60 sm:w-56 w-48 h-40 object-cover mb-4"
+              />
+                <div className="flex flex-col w-80 p-4">
+                  <h5 className="text-lg font-semibold mb-2">{`Product ${
+                    index + 1
+                  }`}</h5>
+                  <p className="text-gray-600 mb-2">
+                    <b>Description:</b> Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud
+                  </p>
+                  <p className="text-gray-600 mb-2">
+                    <b>Price:</b> {productsData?.price[index]}
+                  </p>
+                  <div className="flex justify-end">
+                    <span className="text-md mr-2 mt-2">
+                      {addedStates[index] && "added"}
+                    </span>
+                    <button
+                      className="bg-blue-800 px-4 py-2 text-white"
+                      onClick={() => addToCart(productsData, index)}
+                    >
+                      add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default CartPage;
+export default WishlistPage;

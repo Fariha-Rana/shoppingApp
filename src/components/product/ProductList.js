@@ -15,13 +15,17 @@ const ProductList = async ({ query }) => {
   }));
 
   return (
-    <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mx-4 mb-8">
+    <>
+      {!images || images.length == 0 ? (
+        <p className="text-white bg-black rounded-md text-center">no product found</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mx-4 mb-8">
       {dummyProducts.map((product) => (
         <div key={product.id} className="bg-neutral-200 p-8 rounded shadow">
           <Image
             width={500}
             height={500}
-            src={product.image}
+            src={product.image || "https://via.placeholder.com/500x500"}
             alt={product.title}
             className="w-full h-72 object-cover mb-2 rounded"
           />
@@ -51,6 +55,8 @@ const ProductList = async ({ query }) => {
         </div>
       ))}
     </div>
+      )}
+    </>
   );
 };
 
