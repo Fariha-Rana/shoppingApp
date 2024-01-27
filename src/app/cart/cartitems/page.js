@@ -90,18 +90,18 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="min-h-screen mt-36 flex flex-col items-center justify-center">
+    <div className="min-h-screen mt-36 ">
       {(productsData?.image?.length == 0 || !productsData) && (
         <div className="bg-blue-700 text-white p-4 text-center justify-center items-start">
           Nothing in cart yet
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-4  mx-4 mb-8  w-full">
+      <div className="flex flex-col justify-center items-center gap-4 mx-4 mb-8 ">
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
-             className="bg-white p-4 my-4 w-full sm:w-max shadow-md flex flex-col sm:flex-row justify-center items-center sm:max-w-none"
+             className="bg-white p-4 my-4 w-max shadow-md flex flex-col sm:flex-row justify-center items-center  max-[500px]:max-w-none"
               key={index}
             >
               <Image

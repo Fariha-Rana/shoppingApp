@@ -104,7 +104,7 @@ const WishlistPage = () => {
 
   return (
     <>
-      <div className="min-h-screen mt-36 flex flex-col items-center justify-center">
+      <div className="min-h-screen mt-36">
 
       {(productsData?.image?.length == 0 || !productsData) && (
           <div className="bg-blue-700 text-white p-4 text-center">
@@ -112,12 +112,12 @@ const WishlistPage = () => {
           </div>
         )}
     
-        <div className="grid grid-cols-1 gap-4  mx-4 mb-8  w-full">
+        <div className=" flex flex-col items-center justify-center">
 
           {productsData &&
             productsData?.image?.map((desc, index) => (
               <div
-                className="bg-white p-4 my-4 w-full sm:w-max shadow-md flex flex-col sm:flex-row justify-center items-center sm:max-w-none"
+                className="bg-white p-4 my-4 w-max shadow-md flex flex-col sm:flex-row justify-center items-center sm:max-w-none"
                 key={index}
               >
                 <Image
