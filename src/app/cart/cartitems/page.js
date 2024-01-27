@@ -90,7 +90,7 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="min-h-screen mt-36 ">
+    <div className="min-h-screen mt-36 flex flex-col items-center justify-center">
       {(productsData?.image?.length == 0 || !productsData) && (
         <div className="bg-blue-700 text-white p-4 text-center justify-center items-start">
           Nothing in cart yet
