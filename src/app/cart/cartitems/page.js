@@ -97,14 +97,14 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="mt-32 flex flex-col justify-center  items-center gap-4 min-h-screen">
+    <div className="mt-32 flex flex-col justify-center  items-center gap-4 min-h-screen ">
       {(productsData?.image?.length == 0 || !productsData) && (
         <div className="bg-blue-700 text-white p-4 text-center justify-center items-start">
           Nothing in cart yet
         </div>
       )}
 
-      <div className="mt-8  gap-4 ">
+      <div className="mt-8  gap-4 max-[370px]:m-8">
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
