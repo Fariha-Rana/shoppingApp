@@ -16,7 +16,7 @@ const CartPage = () => {
   const { userData } = useAuthentication();
   const userid = userData?.$id;
 
-  const {cartCount, setCartCount} = useCount();
+  const { cartCount, setCartCount } = useCount();
 
   const handleIncreaseQuantity = async (index) => {
     setQuantities((prevQuantities) => {
@@ -56,23 +56,16 @@ const CartPage = () => {
 
     updatedQuantities.splice(index, 1);
 
-    let updatedCartCount;
-    if(cartCount >= 1){
-      updatedCartCount = cartCount - 1
-    }
-    else {
-      updatedCartCount = 0
-    }
+    const updatedCartCount = Math.max(cartCount - 1, 0);
     const count = {
-        cart : updatedCartCount
-    }
+      cart: updatedCartCount,
+    };
 
-    setCartCount(count.cart)
-
+    setCartCount(count.cart);
     setProductsData(updatedProductsData);
     setQuantities(updatedQuantities);
 
-    await userSavedData.updateCartandWishlistCount(userid, count)
+    await userSavedData.updateCartandWishlistCount(userid, count);
     await userSavedData.removeCartorWishlistItem(
       CART_COLLECTION_ID,
       userid,
@@ -108,7 +101,7 @@ const CartPage = () => {
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
-              className="bg-white p-4 my-4 w-max shadow-md flex justify-center items-center max-[500px]:flex-col max-[370px]:ml-4"
+             className="bg-white p-4 my-4 w-full sm:w-max shadow-md flex flex-col sm:flex-row justify-center items-center max-w-[500px] sm:max-w-none"
               key={index}
             >
               <Image
@@ -184,7 +177,7 @@ const CartPage = () => {
           ))}
       </div>
 
-      {productsData?.image?.length > 0  && (
+      {productsData?.image?.length > 0 && (
         <div className="col-span-2 my-4 flex justify-center space-x-4">
           <button className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition duration-300">
             Checkout
