@@ -7,7 +7,7 @@ const Auth = () => {
   const { userData } = useAuthentication();
   
   return (
-    <div className="flex items-center text-center max-[560px]:text-sm text-[0.7rem]">
+    <div className="flex items-center text-center max-[560px]:text-sm text-[1rem]">
       {userData ? (
         <p className="text-white font-mono mr-1 "> 👋Hii,{userData?.name}</p>
       ) : (
