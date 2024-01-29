@@ -90,7 +90,7 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="min-h-screen mt-32">
+    <div className="min-h-screen mt-36">
       <div className="bg-blue-700 text-white p-4 my-3 text-center">
         {productsData?.image?.length == 0 || !productsData
           ? "Nothing in Wishlist yet "
