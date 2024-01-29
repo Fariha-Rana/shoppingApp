@@ -9,12 +9,12 @@ const Auth = () => {
   return (
     <div className="flex items-center text-center max-[560px]:text-sm text-[0.7rem]">
       {userData ? (
-        <p className="text-white font-mono mr-1 text-[1.2rem]"> 👋Hii,{userData?.name}</p>
+        <p className="text-white font-mono mr-1 "> 👋Hii,{userData?.name}</p>
       ) : (
       <>
       <Link
           href="/authentication/signin"
-          className="text-white mr-1 text-nowrap"
+          className="text-white mr-1 text-nowrap max-[560px]:text-[0.5rem] "
         >
           <b className="max-[560px]:text-[0.7rem] text-[0.9rem] "> hello!👋</b>
           <br />

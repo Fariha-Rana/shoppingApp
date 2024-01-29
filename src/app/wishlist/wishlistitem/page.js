@@ -16,10 +16,10 @@ const WishlistPage = () => {
   const [addedStates, setAddedStates] = useState([]);
 
   const { cartCount, wishlistCount, setWishlistCount, setCartCount } =
-  useCount();
+    useCount();
   const { userData } = useAuthentication();
 
-  const userid = userData?.$id
+  const userid = userData?.$id;
 
   const addToCart = async (product, index) => {
     const data = {
@@ -47,9 +47,7 @@ const WishlistPage = () => {
     );
   };
 
-
-
-   const removeItem = async (index) => {
+  const removeItem = async (index) => {
     const data = {
       image: productsData.image[index],
       price: productsData.price[index],
@@ -68,25 +66,22 @@ const WishlistPage = () => {
 
     const updatedCount = wishlistCount - 1;
     const count = {
-        wishlist : updatedCount
-    }
+      wishlist: updatedCount,
+    };
 
-    
-    setWishlistCount(count.wishlist)
+    setWishlistCount(count.wishlist);
     setProductsData(updatedProductsData);
     setAddedStates(updatedQuantities);
-    
-    await userSavedData.updateCartandWishlistCount(userid, count)
-     userSavedData.removeCartorWishlistItem(
+
+    await userSavedData.updateCartandWishlistCount(userid, count);
+    userSavedData.removeCartorWishlistItem(
       WISHLIST_COLLECTION_ID,
       userid,
       data
     );
   };
 
-
   async function getData() {
-
     const data = await userSavedData.existingDoc(
       WISHLIST_COLLECTION_ID,
       userid
@@ -104,33 +99,33 @@ const WishlistPage = () => {
 
   return (
     <>
-      <div className="min-h-screen mt-36">
-
-      {(productsData?.image?.length == 0 || !productsData) && (
+      <div className="min-h-screen mt-32">
           <div className="bg-blue-700 text-white p-4 text-center">
-            Nothing in Wishlist yet
+            {(productsData?.image?.length == 0 || !productsData) ? "Nothing in Wishlist yet " : "Items in your Wishlist"} 
           </div>
-        )}
-    
-        <div className=" flex flex-col items-center justify-center">
 
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4 m-4 ">
           {productsData &&
             productsData?.image?.map((desc, index) => (
               <div
-                className="bg-white p-4 my-4 w-max shadow-md flex flex-col sm:flex-row justify-center items-center sm:max-w-none"
+                className="bg-white shadow-md flex flex-col justify-center items-center p-4"
                 key={index}
               >
-                <Image
-                width={500}
-                height={500}
-                src={productsData?.image[index]}
-                alt="product image"
-                className="lg:w-64 md:w-60 sm:w-56 w-48 h-40 object-cover mb-4"
-                priority={true}
-              />
+                <div className="flex justify-center items-center w-[14rem] max-[650px]:w-max mb-4">
+                  <Image
+                    width={500}
+                    height={500}
+                    src={productsData?.image[index]}
+                    alt="product image"
+                    className="w-auto h-[10rem] object-cover "
+                    priority={true}
+                  />
+                </div>
 
-                <div className="flex flex-col w-80 p-4">
-                  <h5 className="text-lg font-semibold mb-2">{`Product ${index + 1}`}</h5>
+                <div className="flex flex-col ">
+                  <h5 className="text-lg font-semibold mb-2">{`Product ${
+                    index + 1
+                  }`}</h5>
 
                   <p className="text-gray-600 mb-2">
                     <b>Description:</b> Lorem ipsum dolor sit amet, consectetur
@@ -155,14 +150,14 @@ const WishlistPage = () => {
                     </button>
 
                     <button className="" onClick={() => removeItem(index)}>
-                    <Image
-                      width={20}
-                      height={20}
-                      src="https://img.icons8.com/ios-filled/50/waste.png"
-                      alt="delete this item"
-                      className="w-5 h-auto"
-                    />
-                  </button>
+                      <Image
+                        width={20}
+                        height={20}
+                        src="https://img.icons8.com/ios-filled/50/waste.png"
+                        alt="delete this item"
+                        className="w-5 h-auto"
+                      />
+                    </button>
                   </div>
                 </div>
               </div>

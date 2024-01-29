@@ -90,30 +90,32 @@ const CartPage = () => {
   }, [userid]);
 
   return (
-    <div className="min-h-screen mt-36 ">
-      {(productsData?.image?.length == 0 || !productsData) && (
-        <div className="bg-blue-700 text-white p-4 text-center justify-center items-start">
-          Nothing in cart yet
-        </div>
-      )}
+    <div className="min-h-screen mt-32">
+      <div className="bg-blue-700 text-white p-4 mb-2 text-center">
+        {productsData?.image?.length == 0 || !productsData
+          ? "Nothing in Wishlist yet "
+          : "Items in your Wishlist"}
+      </div>
 
-      <div className="flex flex-col justify-center items-center gap-4 mx-4 mb-8 ">
+      <div className="flex flex-col justify-center items-center gap-4 m-4 ">
         {productsData &&
           productsData?.image?.map((desc, index) => (
             <div
-             className="bg-white p-4 my-4 w-max shadow-md flex flex-col sm:flex-row justify-center items-center  max-[500px]:max-w-none"
+              className="bg-white shadow-md flex flex-col  min-[700px]:flex-row justify-center items-center p-4"
               key={index}
             >
-              <Image
-                width={500}
-                height={500}
-                src={productsData?.image[index]}
-                alt="product image"
-                className="lg:w-64 md:w-60 sm:w-56 w-48 h-40 object-cover mb-4"
-                priority={true}
-              />
+              <div className="flex justify-center items-center w-[14rem] max-[650px]:w-max min-[700px]:mr-4 max-[650px]:mb-4">
+                <Image
+                  width={500}
+                  height={500}
+                  src={productsData?.image[index]}
+                  alt="product image"
+                  className="w-auto h-[10rem] object-cover "
+                  priority={true}
+                />
+              </div>
 
-              <div className="flex flex-col w-80 p-4">
+              <div className="flex flex-col">
                 <h5 className="text-lg font-semibold mb-2">{`Product name`}</h5>
 
                 <p className="text-gray-600 mb-2">
@@ -126,7 +128,7 @@ const CartPage = () => {
                   <b>Price:</b> {productsData?.price[index]}
                 </p>
 
-                <div className="flex space-x-8 items-center mb-4 ">
+                <div className="flex space-x-8 items-center mb-4  ">
                   <span>
                     <b>quantity:</b> {quantity[index] || 0}
                   </span>
