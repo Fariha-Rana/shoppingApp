@@ -53,10 +53,10 @@ const CartPage = () => {
     updatedProductsData.inCart.splice(index, 1);
 
     const updatedQuantities = [...quantity];
-
     updatedQuantities.splice(index, 1);
 
-    const updatedCartCount = Math.max(cartCount - 1, 0);
+    const updatedCartCount = updatedProductsData.inCart.length;
+    // const updatedCartCount = Math.max(cartCount - 1, 0);
     const count = {
       cart: updatedCartCount,
     };
