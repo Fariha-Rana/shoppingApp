@@ -14,9 +14,9 @@ const Auth = () => {
       <>
       <Link
           href="/authentication/signin"
-          className="text-white mr-1 text-nowrap max-[560px]:text-[0.5rem] "
+          className="text-white mr-1 text-nowrap max-[560px]:text-[0.5rem] text-sm flex flex-col justify-center items-center"
         >
-          <b className="max-[560px]:text-[0.7rem] text-[0.9rem] block"> hello!👋</b>
+          <b className="max-[560px]:text-[0.7rem] text-[0.9rem] "> hello!👋</b>
           Sign In as Guest
         </Link>
       <div className="bg-white p-1 rounded-full">
