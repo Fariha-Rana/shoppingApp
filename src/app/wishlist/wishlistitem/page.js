@@ -64,7 +64,7 @@ const WishlistPage = () => {
     const updatedQuantities = [...addedStates];
     updatedQuantities.splice(index, 1);
 
-    const updatedCount = wishlistCount - 1;
+    const updatedCount = updatedProductsData.inWishlist.length;
     const count = {
       wishlist: updatedCount,
     };

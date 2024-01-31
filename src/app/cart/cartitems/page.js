@@ -16,7 +16,7 @@ const CartPage = () => {
   const { userData } = useAuthentication();
   const userid = userData?.$id;
 
-  const { cartCount, setCartCount } = useCount();
+  const { setCartCount } = useCount();
 
   const handleIncreaseQuantity = async (index) => {
     setQuantities((prevQuantities) => {
@@ -56,7 +56,7 @@ const CartPage = () => {
     updatedQuantities.splice(index, 1);
 
     const updatedCartCount = updatedProductsData.inCart.length;
-    // const updatedCartCount = Math.max(cartCount - 1, 0);
+
     const count = {
       cart: updatedCartCount,
     };
