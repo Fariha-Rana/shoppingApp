@@ -65,12 +65,10 @@ const CartPage = () => {
     setProductsData(updatedProductsData);
     setQuantities(updatedQuantities);
 
-    await userSavedData.updateCartandWishlistCount(userid, count);
-    await userSavedData.removeCartorWishlistItem(
-      CART_COLLECTION_ID,
-      userid,
-      data
-    );
+    await Promise.all([
+      userSavedData.updateCartandWishlistCount(userid, count),
+      userSavedData.removeCartorWishlistItem(CART_COLLECTION_ID, userid, data),
+    ]);
   };
 
   async function getData() {
