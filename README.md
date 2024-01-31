@@ -76,8 +76,8 @@ Includes all the environment variables to connect to appwrite backend services.
 ## Setup 
 
 1. clone repository.
-2. Run `touch .env.local` in command line. See the `.env.example` file to see what env variables you need.
-3. Run `pnpm start`to Starts the production server.
+2. Run `touch .env.local` in command line. See the `.env.example` file what env variables you need.
+3. Run `pnpm start`to start the development server.
 
 
 ## Dependencies
