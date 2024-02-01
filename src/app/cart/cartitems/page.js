@@ -9,6 +9,8 @@ import { CART_COLLECTION_ID } from "@/utils/envVariables";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
+import CartSubmitButton from "./CartSubmitButton";
+
 const CartPage = () => {
   const [productsData, setProductsData] = useState(null);
   const [quantity, setQuantities] = useState([]);
@@ -91,8 +93,8 @@ const CartPage = () => {
     <div className="min-h-screen mt-36">
       <div className="bg-blue-700 text-white p-4 my-3 text-center">
         {productsData?.image?.length == 0 || !productsData
-          ? "Nothing in Wishlist yet "
-          : "Items in your Wishlist"}
+          ? "Nothing in Cart yet "
+          : "Items in your cart"}
       </div>
 
       <div className="flex flex-col justify-center items-center gap-4 m-4 ">
@@ -161,17 +163,7 @@ const CartPage = () => {
                   </button>
                 </div>
 
-                <div className="flex space-x-4 justify-end">
-                  <button className="" onClick={() => removeItem(index)}>
-                    <Image
-                      width={20}
-                      height={20}
-                      src="https://img.icons8.com/ios-filled/50/waste.png"
-                      alt="delete this item"
-                      className="w-5 h-auto"
-                    />
-                  </button>
-                </div>
+               <CartSubmitButton  removeItem={removeItem} index={index}/>
               </div>
             </div>
           ))}

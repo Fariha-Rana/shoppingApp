@@ -11,6 +11,9 @@ import userSavedData from "@/utils/UserSavedData";
 import useAuthentication from "@/context/useAuthentication";
 import useCount from "@/context/useCount";
 
+import WishlistSubmitButton from "./WishlistSubmitButton";
+
+
 const WishlistPage = () => {
   const [productsData, setProductsData] = useState(null);
   const [addedStates, setAddedStates] = useState([]);
@@ -149,15 +152,7 @@ const WishlistPage = () => {
                       add to cart
                     </button>
 
-                    <button className="" onClick={() => removeItem(index)}>
-                      <Image
-                        width={20}
-                        height={20}
-                        src="https://img.icons8.com/ios-filled/50/waste.png"
-                        alt="delete this item"
-                        className="w-5 h-auto"
-                      />
-                    </button>
+                    <WishlistSubmitButton  removeItem={removeItem} index={index}/>
                   </div>
                 </div>
               </div>
