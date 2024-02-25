@@ -25,9 +25,7 @@ const Navbar = () => {
       <ul className="hidden min-[900px]:flex justify-between items-center px-8 py-2 bg-gray-600 ">
         <div className="flex items-center min-[800px]:gap-12">
           <Link href="/" className="">
-            <Image
-              width={16}
-              height={16}
+            <img
               alt="logo"
               src="/next.svg"
               className="w-20 h-auto"
@@ -51,9 +49,7 @@ const Navbar = () => {
 
         <aside className="min-[899px]:hidden flex items-center justify-between bg-gray-600 px-2 py-2">
           <Link href="/" className="max-[560px]:w-10">
-            <Image
-              width={16}
-              height={16}
+            <img
               alt="logo"
               src="/next.svg"
               className="w-16 h-auto"

@@ -45,13 +45,10 @@ function Highlight() {
             } w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
             data-te-carousel-active={index === activeSlide}
           >
-            <Image
+            <img
               src={banner?.image}
-              width={1600}
-              height={1900}
               className="block w-full h-auto"
               alt={`Slide ${index + 1}`}
-              priority={true}
             />
           </div>
         ))}

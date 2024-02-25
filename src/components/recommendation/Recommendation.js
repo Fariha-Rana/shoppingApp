@@ -18,13 +18,10 @@ export default function Recommendation() {
           </h1>
 
           <div className="flex justify-center">
-            <Image
-              width={400}
-              height={400}
+            <img
               className="min-[900px]:h-[22rem] max-[600px]:h-[10rem]  w-auto h-auto rounded-sm py-2"
               src={categ?.image}
-              alt="pic"
-              priority={true}
+              alt="product image"
             />
           </div>
           

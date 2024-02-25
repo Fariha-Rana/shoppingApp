@@ -6,9 +6,7 @@ function CartSubmitButton({ removeItem, index }) {
   return (
     <div className="flex space-x-4 justify-end">
       <button className="" onClick={() => removeItem(index)}>
-        <Image
-          width={20}
-          height={20}
+        <img
           src="https://img.icons8.com/ios-filled/50/waste.png"
           alt="delete this item"
           className="w-5 h-auto"

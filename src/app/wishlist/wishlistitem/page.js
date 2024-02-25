@@ -123,13 +123,10 @@ const WishlistPage = () => {
                 key={index}
               >
                 <div className="flex justify-center items-center w-[14rem] max-[650px]:w-max mb-4">
-                  <Image
-                    width={500}
-                    height={500}
+                  <img
                     src={productsData?.image[index]}
                     alt="product image"
                     className="w-auto h-[10rem] object-cover "
-                    priority={true}
                   />
                 </div>
 

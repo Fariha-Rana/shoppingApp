@@ -24,9 +24,7 @@ const ProductList = async ({ query }) => {
 
       {dummyProducts.map((product) => (
         <div key={product.id} className="bg-neutral-200 p-8 rounded shadow">
-          <Image
-            width={500}
-            height={500}
+          <img
             src={product.image || "https://via.placeholder.com/500x500"}
             alt={product.title}
             className="w-full h-72 object-cover mb-2 rounded"

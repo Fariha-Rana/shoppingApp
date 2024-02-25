@@ -111,9 +111,7 @@ function CartandWishlist({ product }) {
       {/* Wishlist button */}
       {!inWishlist ? (
         <button className="text-gray-500 " onClick={postWishlistData}>
-          <Image
-            width={28}
-            height={28}
+          <img
             src="https://img.icons8.com/material-outlined/24/like--v1.png"
             alt="like--v3"
             className="rounded-full w-6 h-auto"
@@ -121,9 +119,7 @@ function CartandWishlist({ product }) {
         </button>
       ) : (
         <button className="text-gray-500">
-          <Image
-            width={28}
-            height={28}
+          <img
             src="https://img.icons8.com/color/48/like--v3.png"
             alt="like--v3"
             className="rounded-full w-6 h-auto "
