@@ -13,7 +13,6 @@ import useCount from "@/context/useCount";
 
 import WishlistSubmitButton from "./WishlistSubmitButton";
 
-
 const WishlistPage = () => {
   const [productsData, setProductsData] = useState(null);
   const [addedStates, setAddedStates] = useState([]);
@@ -76,12 +75,19 @@ const WishlistPage = () => {
     setProductsData(updatedProductsData);
     setAddedStates(updatedQuantities);
 
-    await userSavedData.updateCartandWishlistCount(userid, count);
-    userSavedData.removeCartorWishlistItem(
-      WISHLIST_COLLECTION_ID,
-      userid,
-      data
-    );
+    try {
+      const reponse = await Promise.all([
+        userSavedData.updateCartandWishlistCount(userid, count),
+        userSavedData.removeCartorWishlistItem(
+          WISHLIST_COLLECTION_ID,
+          userid,
+          data
+        ),
+      ]);
+      console.log(reponse)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   async function getData() {
@@ -103,9 +109,11 @@ const WishlistPage = () => {
   return (
     <>
       <div className="min-h-screen mt-36">
-          <div className="bg-blue-700 text-white p-4 my-3 text-center">
-            {(productsData?.image?.length == 0 || !productsData) ? "Nothing in Wishlist yet " : "Items in your Wishlist"} 
-          </div>
+        <div className="bg-blue-700 text-white p-4 my-3 text-center">
+          {productsData?.image?.length == 0 || !productsData
+            ? "Nothing in Wishlist yet "
+            : "Items in your Wishlist"}
+        </div>
 
         <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4 m-4 ">
           {productsData &&
@@ -152,7 +160,10 @@ const WishlistPage = () => {
                       add to cart
                     </button>
 
-                    <WishlistSubmitButton  removeItem={removeItem} index={index}/>
+                    <WishlistSubmitButton
+                      removeItem={removeItem}
+                      index={index}
+                    />
                   </div>
                 </div>
               </div>

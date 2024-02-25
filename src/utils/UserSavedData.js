@@ -128,12 +128,12 @@ class UserSavedData {
                     inWishlist: filteredInWishlist,
                 }
             );
-            console.log(response);
+            return response;
         } else {
-            console.log('Image not found in the array');
+           return null
         }
     } catch (error) {
-      console.log(error)
+      throw error
     }
     
   }

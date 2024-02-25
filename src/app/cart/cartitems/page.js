@@ -47,13 +47,13 @@ const CartPage = () => {
       inCart: productsData.inCart[index],
     };
 
-    const updatedProductsData = { ...productsData };
-
+    let updatedProductsData = { ...productsData };
+    
     updatedProductsData.image.splice(index, 1);
     updatedProductsData.price.splice(index, 1);
     updatedProductsData.inWishlist.splice(index, 1);
     updatedProductsData.inCart.splice(index, 1);
-
+    
     const updatedQuantities = [...quantity];
     updatedQuantities.splice(index, 1);
 
@@ -67,10 +67,16 @@ const CartPage = () => {
     setProductsData(updatedProductsData);
     setQuantities(updatedQuantities);
 
-    await Promise.all([
-      userSavedData.updateCartandWishlistCount(userid, count),
-      userSavedData.removeCartorWishlistItem(CART_COLLECTION_ID, userid, data),
-    ]);
+    try {
+     const response = await Promise.all([
+        userSavedData.updateCartandWishlistCount(userid, count),
+        userSavedData.removeCartorWishlistItem(CART_COLLECTION_ID, userid, data),
+      ]);
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+      
+    }
   };
 
   async function getData() {
@@ -105,13 +111,10 @@ const CartPage = () => {
               key={index}
             >
               <div className="flex justify-center items-center w-[14rem] max-[650px]:w-max min-[700px]:mr-4 max-[650px]:mb-4">
-                <Image
-                  width={500}
-                  height={500}
+                <img
                   src={productsData?.image[index]}
                   alt="product image"
                   className="w-auto h-[10rem] object-cover "
-                  priority={true}
                 />
               </div>
 
