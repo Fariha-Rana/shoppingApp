@@ -156,11 +156,9 @@ const CartPage = () => {
                     className="rounded-full hover:bg-gray-600 transition duration-300"
                     onClick={() => handleDecreaseQuantity(index)}
                   >
-                    <Image
-                      width={20}
-                      height={20}
+                    <img
                       src="https://img.icons8.com/ios/50/minus.png"
-                      alt="minus"
+                      alt="decrease"
                       className="w-5 h-auto"
                     />
                   </button>
