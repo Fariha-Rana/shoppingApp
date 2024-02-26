@@ -113,7 +113,7 @@ function CartandWishlist({ product }) {
         <button className="text-gray-500 " onClick={postWishlistData}>
           <img
             src="https://img.icons8.com/material-outlined/24/like--v1.png"
-            alt="like--v3"
+            alt="wishlist"
             className="rounded-full w-6 h-auto"
           />
         </button>
@@ -121,7 +121,7 @@ function CartandWishlist({ product }) {
         <button className="text-gray-500">
           <img
             src="https://img.icons8.com/color/48/like--v3.png"
-            alt="like--v3"
+            alt="wishlisted"
             className="rounded-full w-6 h-auto "
           />
         </button>

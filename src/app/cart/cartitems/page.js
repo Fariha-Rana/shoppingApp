@@ -47,35 +47,25 @@ const CartPage = () => {
       inCart: productsData.inCart[index],
     };
 
-    let updatedProductsData = { ...productsData };
-    
-    updatedProductsData.image.splice(index, 1);
-    updatedProductsData.price.splice(index, 1);
-    updatedProductsData.inWishlist.splice(index, 1);
-    updatedProductsData.inCart.splice(index, 1);
-    
-    const updatedQuantities = [...quantity];
-    updatedQuantities.splice(index, 1);
-
-    const updatedCartCount = updatedProductsData.inCart.length;
+    const updatedCartCount = productsData.inCart.length - 1;
 
     const count = {
       cart: updatedCartCount,
     };
 
-    setCartCount(count.cart);
-    setProductsData(updatedProductsData);
-    setQuantities(updatedQuantities);
-
     try {
-     const response = await Promise.all([
+      await Promise.all([
         userSavedData.updateCartandWishlistCount(userid, count),
-        userSavedData.removeCartorWishlistItem(CART_COLLECTION_ID, userid, data),
+        userSavedData.removeCartorWishlistItem(
+          CART_COLLECTION_ID,
+          userid,
+          data
+        ),
       ]);
-      console.log(response)
+      await getData();
+      setCartCount(count.cart);
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
   };
 
@@ -163,8 +153,7 @@ const CartPage = () => {
                     />
                   </button>
                 </div>
-
-               <CartSubmitButton  removeItem={removeItem} index={index}/>
+                <CartSubmitButton removeItem={removeItem} index={index} />
               </div>
             </div>
           ))}

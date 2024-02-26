@@ -57,26 +57,14 @@ const WishlistPage = () => {
       inCart: productsData.inCart[index],
     };
 
-    const updatedProductsData = { ...productsData };
-    updatedProductsData.image.splice(index, 1);
-    updatedProductsData.price.splice(index, 1);
-    updatedProductsData.inWishlist.splice(index, 1);
-    updatedProductsData.inCart.splice(index, 1);
+    const updatedCount = productsData.inWishlist.length - 1;
 
-    const updatedQuantities = [...addedStates];
-    updatedQuantities.splice(index, 1);
-
-    const updatedCount = updatedProductsData.inWishlist.length;
     const count = {
       wishlist: updatedCount,
     };
 
-    setWishlistCount(count.wishlist);
-    setProductsData(updatedProductsData);
-    setAddedStates(updatedQuantities);
-
     try {
-      const reponse = await Promise.all([
+      await Promise.all([
         userSavedData.updateCartandWishlistCount(userid, count),
         userSavedData.removeCartorWishlistItem(
           WISHLIST_COLLECTION_ID,
@@ -84,7 +72,8 @@ const WishlistPage = () => {
           data
         ),
       ]);
-      console.log(reponse)
+      await getData();
+      setWishlistCount(count.wishlist);
     } catch (error) {
       console.log(error);
     }
